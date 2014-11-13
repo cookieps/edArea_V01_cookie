@@ -21,6 +21,9 @@ GET         /image/:id                         controllers.Courses.renderImage(i
 
 GET         /id                                controllers.Courses.showCoursePage(id)
 
+GET         /user/:id                      controllers.Users.showUserPage(id)
+
+
 
 # доступ к файлам на сервере
 GET         /assets/*file                      controllers.Assets.at(path="/public", file)

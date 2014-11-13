@@ -5,7 +5,7 @@
     <div class="login">
 
         <dl id="user">
-            <dt>@user.name <span>(@user.email)</span></dt>
+           <a href="@routes.Users.showUserPage(user.email)"> <dt>@user.name <span>(@user.email)</span></dt></a>
             <dd>
                 <a href="@routes.Application.logout()">Logout</a>
             </dd>

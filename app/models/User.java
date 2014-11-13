@@ -12,14 +12,20 @@ public class User extends Model {
     @Id
     public String email;
     public String name;
+    public String country;
+    public String city;
+    public String birthDate;
     public int userType;        // тип пользователя (1 - админ, 2 - студент, 3 - препод )
     public String password;
 //    public static List<Course> courses;
 
 
-    public User(String email, String name, int userType, String password) {
+    public User(String email, String name, int userType, String password, String country, String birthDate, String city) {
         this.email = email;
         this.name = name;
+        this.birthDate = birthDate;
+        this.city = city;
+        this.country = country;
         this.userType = userType;
         this.password = password;
     }

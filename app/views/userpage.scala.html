@@ -1,0 +1,25 @@
+@(user: User)
+
+@main(user) {
+
+<h1>Информация о пользователе</h1>
+
+        <h1>@user.name</h1>
+
+        <p>Дата рождения @user.birthDate</p>
+        <p>Страна @user.country</p>
+        <p>Город @user.city</p>
+    <p>тип пользователя
+    @if(user.userType == 1) {
+        Администратор
+    }
+    @if(user.userType == 2) {
+           Студент
+    }
+        @if(user.userType == 3) {
+        Учитель
+    }
+
+
+    </p>
+}

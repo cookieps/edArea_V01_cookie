@@ -59,7 +59,9 @@ public class Application extends Controller
     public static Result addUser()
     {
         Form<Registration> reg_form = Form.form(Registration.class).bindFromRequest();
-        new User(reg_form.get().email, reg_form.get().name,reg_form.get().userType, reg_form.get().password).save();
+        new User(reg_form.get().email, reg_form.get().name,reg_form.get().userType, reg_form.get().password,
+                reg_form.get().birthDate, reg_form.get().country, reg_form.get().city).save();
+
         authenticate();
         return redirect(routes.Application.index());
     }
@@ -85,6 +87,9 @@ public class Application extends Controller
         public String email;
         public int userType;
         public String password;
+        public String birthDate;
+        public String country;
+        public String city;
     }
 
 

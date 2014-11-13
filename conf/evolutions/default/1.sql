@@ -23,6 +23,9 @@ create table picture (
 create table user (
   email                     varchar(255) not null,
   name                      varchar(255),
+  country                   varchar(255),
+  city                      varchar(255),
+  birth_date                varchar(255),
   user_type                 integer,
   password                  varchar(255),
   constraint pk_user primary key (email))
