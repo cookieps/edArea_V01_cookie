@@ -20,7 +20,7 @@ POST        /image/upload                      controllers.Courses.uploadFile()
 
 GET         /id                                controllers.Courses.showCoursePage(id)
 
-GET         /user/:id                      controllers.Users.showUserPage(id)
+GET         /user/:id                      controllers.Users.showUserPage(id : Long)
 
 
 

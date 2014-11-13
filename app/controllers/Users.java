@@ -6,6 +6,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 
+import views.html.courses;
 import views.html.userpage;
 
 /**
@@ -17,8 +18,11 @@ public class Users extends Controller {
 
 
 
-    public static Result showUserPage(String user) {   // генерация страницы пользователя
-        return ok(userpage.render(User.find.byId(user)));
+    public static Result showUserPage(Long user) {   // генерация страницы пользователя
+
+       // return ok(userpage.render(User.find.
+        return ok(userpage.render(User.find.where().like("id", "%" + user + "%").findUnique()));
+
     }
 
 

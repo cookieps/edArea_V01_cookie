@@ -15,6 +15,7 @@ create table course (
 
 create table user (
   email                     varchar(255) not null,
+  id                        integer,
   name                      varchar(255),
   country                   varchar(255),
   city                      varchar(255),

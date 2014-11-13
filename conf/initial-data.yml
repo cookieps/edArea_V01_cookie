@@ -1,17 +1,27 @@
 - &bob !!models.User
     email:          bob@gmail.com
     name:           Bob
-    password:       secret
+    password:       qwerty
     userType:       3
+    id:             1
 
 - &dan !!models.User
-    email:          paul@mail.com
-    name:           Dan
+    email:          cookie@mail.com
+    name:           Cookie
     password:       qwerty
     userType:       2
+    id:             2
 
 - &jeff !!models.User
     email:          jeff@gmail.com
     name:           Jeff
-    password:       secret
+    password:       qwerty
     userType:       2
+    id:             3
+
+- &jeff !!models.User
+    email:          paul@mail.com
+    name:           Paul
+    password:       qwerty
+    userType:       2
+    id:             4
