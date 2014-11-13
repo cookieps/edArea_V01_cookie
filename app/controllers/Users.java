@@ -17,11 +17,7 @@ public class Users extends Controller {
 
 
 
-    public static Result showUserPage(String user) {
-
-
-
-
+    public static Result showUserPage(String user) {   // генерация страницы пользователя
         return ok(userpage.render(User.find.byId(user)));
     }
 

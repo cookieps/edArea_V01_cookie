@@ -17,7 +17,6 @@ POST        /addingCourse                      controllers.Courses.add()
 GET         /courses                           controllers.Courses.showCourses()
 
 POST        /image/upload                      controllers.Courses.uploadFile()
-GET         /image/:id                         controllers.Courses.renderImage(id:  Long)
 
 GET         /id                                controllers.Courses.showCoursePage(id)
 

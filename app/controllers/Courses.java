@@ -1,8 +1,6 @@
 package controllers;
 
-import com.avaje.ebean.Ebean;
 import models.Course;
-import models.Picture;
 import models.User;
 
 import play.data.Form;
@@ -81,45 +79,6 @@ public class Courses extends Controller
         return ok(course.render(User.find.byId(request().username()), Course.find.byId(courseName)));
     }
 
-    public static Result uploadPicture() {
-        Course currentCourse =  Course.find.where().like("email", "%"+request().username()+"%").like("current", "true").findUnique();
-
-
-
-
-
-        
-
-        Http.MultipartFormData body = request().body().asMultipartFormData();
-        Http.MultipartFormData.FilePart picture = body.getFile("picture");
-        if (picture != null) {
-            File file = picture.getFile();
-            try {
-                Picture image = new Picture();
-                image.content = com.google.common.io.Files.toByteArray(file);
-                image.contentType = picture.getContentType();
-                image.save();
-
-                System.out.println("\n --------------------------------------------------- \n" + currentCourse.aboutCourse);
-
-              //  currentCourse.logoId = image.id;
-                currentCourse.current = false;
-                currentCourse.save();
-
-
-
-            } catch (IOException e) {
-                return badRequest();
-            }
-
-
-
-            return ok(course.render(User.find.byId(request().username()), currentCourse));
-        } else {
-            return badRequest(upload.render(null, "File uploaded"));
-        }
-    }  // старый метод, нигде не используется
-
 
 
     public static Result uploadFile() throws IOException {    // заливка каринки на сервер
@@ -146,10 +105,7 @@ public class Courses extends Controller
 
 
 
-    public static Result renderImage(Long id) {
-        Picture image = Picture.byId(id);
-        return ok(image.content).as(image.contentType);
-    }
+
 
 
 

@@ -14,24 +14,7 @@
         @message
         </blockquote>
 
-        <h1>Upload a picture</h1>
-        @if(id != null) {
-            <img src="@routes.Courses.renderImage(id)" alt="This is an image" />
-        }
 
-
-      <!-- helper.form(action = routes.Courses.uploadPicture(), 'enctype -> "multipart/form-data") {
-            <p>
-                Choose a picture (logo) for your course<br/><br/>
-                <input type="file" name="picture"><br/>
-            </p>
-            <p>
-                <input type="submit">
-            </p>
-        }
--->
-
-        <p>_________________________________________________</p>
 
 
         <form name="fileUploadForm" method="POST" enctype="multipart/form-data" action="@routes.Courses.uploadFile()">
