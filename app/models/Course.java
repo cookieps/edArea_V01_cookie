@@ -26,7 +26,7 @@ public class Course extends Model
     @Column(columnDefinition = "TEXT")
     public String aboutCourse;
 
-    public String logoPath;
+    public String logoPath;  // путь к картинке на сервере
 
     public Blob picture;
 

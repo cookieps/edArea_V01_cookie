@@ -4,14 +4,13 @@ import com.avaje.ebean.Ebean;
 import models.Course;
 import models.Picture;
 import models.User;
-import org.h2.store.fs.FileUtils;
+
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
 import play.mvc.Security;
-import sun.misc.IOUtils;
-import sun.nio.ch.IOUtil;
+
 import views.html.*;
 
 
@@ -19,9 +18,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 
-import static models.Picture.allIds;
 
 /**
  * Created by oliver on 07.11.14.
@@ -121,25 +118,21 @@ public class Courses extends Controller
         } else {
             return badRequest(upload.render(null, "File uploaded"));
         }
-    }
-            //   --------------------------
+    }  // старый метод, нигде не используется
 
 
-    public static Result uploadFile() throws IOException {
+
+    public static Result uploadFile() throws IOException {    // заливка каринки на сервер
         Course currentCourse =  Course.find.where().like("email", "%"+request().username()+"%").like("current", "true").findUnique();
         Http.MultipartFormData body = request().body().asMultipartFormData();
         Http.MultipartFormData.FilePart filePart1 = body.getFile("filePart1");
 
-        idPictureName++;
+        idPictureName++;    // уникальное имя логотипа. нужно придумать более продвинутую систему именования
 
         File newFile1 = new File("public/logos/"+idPictureName+".jpg");
-
-      //  System.out.println("\n"+newFile1.getCanonicalFile().toString()+"\n");
         currentCourse.logoPath = "logos/"+idPictureName+".jpg";
         currentCourse.current = false;
         currentCourse.save();
-
-
         File file1 = filePart1.getFile();
         InputStream isFile1 = new FileInputStream(file1);
         byte[] byteFile1 = org.apache.commons.io.IOUtils.toByteArray(isFile1);
