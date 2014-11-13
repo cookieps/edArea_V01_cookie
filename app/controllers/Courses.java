@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.UUID;
 
 
 /**
@@ -26,7 +27,7 @@ import java.io.InputStream;
 public class Courses extends Controller
 {
 
-    static long idPictureName = 0;
+
 
 
     public static Result creatingCourse()
@@ -86,10 +87,11 @@ public class Courses extends Controller
         Http.MultipartFormData body = request().body().asMultipartFormData();
         Http.MultipartFormData.FilePart filePart1 = body.getFile("filePart1");
 
-        idPictureName++;    // уникальное имя логотипа. нужно придумать более продвинутую систему именования
 
-        File newFile1 = new File("public/logos/"+idPictureName+".jpg");
-        currentCourse.logoPath = "logos/"+idPictureName+".jpg";
+        UUID id1 = UUID.randomUUID();  // уникальное имя лого
+
+        File newFile1 = new File("public/logos/"+id1+".jpg");
+        currentCourse.logoPath = "logos/"+id1+".jpg";
         currentCourse.current = false;
         currentCourse.save();
         File file1 = filePart1.getFile();
