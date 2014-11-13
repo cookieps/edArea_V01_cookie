@@ -7,15 +7,15 @@ create table course (
   course_name               varchar(255) not null,
   email                     varchar(255),
   science                   varchar(255),
-  about_course              varchar(255),
-  logo_id                   bigint,
-  current                   tinyint(1) default 0,
+  about_course              TEXT,
+  logo_path                 varchar(255),
+  current                   boolean,
   constraint pk_course primary key (course_name))
 ;
 
 create table picture (
-  id                        bigint auto_increment not null,
-  content                   longblob,
+  id                        bigint not null,
+  content                   blob,
   content_type              varchar(255),
   constraint pk_picture primary key (id))
 ;
@@ -28,18 +28,30 @@ create table user (
   constraint pk_user primary key (email))
 ;
 
+create sequence course_seq;
+
+create sequence picture_seq;
+
+create sequence user_seq;
+
 
 
 
 # --- !Downs
 
-SET FOREIGN_KEY_CHECKS=0;
+SET REFERENTIAL_INTEGRITY FALSE;
 
-drop table course;
+drop table if exists course;
 
-drop table picture;
+drop table if exists picture;
 
-drop table user;
+drop table if exists user;
 
-SET FOREIGN_KEY_CHECKS=1;
+SET REFERENTIAL_INTEGRITY TRUE;
+
+drop sequence if exists course_seq;
+
+drop sequence if exists picture_seq;
+
+drop sequence if exists user_seq;
 

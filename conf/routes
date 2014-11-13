@@ -3,23 +3,26 @@
 # ~~~~
 
 # Home page
-GET         /                      controllers.Application.index()
+GET         /                                  controllers.Application.index()
 
-GET         /login                 controllers.Application.login()
-POST        /login                 controllers.Application.authenticate()
-GET         /logout                controllers.Application.logout()
+GET         /login                             controllers.Application.login()
+POST        /login                             controllers.Application.authenticate()
+GET         /logout                            controllers.Application.logout()
 
-GET         /registration          controllers.Application.registration()
-POST        /registration          controllers.Application.addUser()
+GET         /registration                      controllers.Application.registration()
+POST        /registration                      controllers.Application.addUser()
 
-GET         /creatingCourse        controllers.Courses.creatingCourse()
-POST        /addingCourse          controllers.Courses.add()
-GET         /courses               controllers.Courses.showCourses()
+GET         /creatingCourse                    controllers.Courses.creatingCourse()
+POST        /addingCourse                      controllers.Courses.add()
+GET         /courses                           controllers.Courses.showCourses()
 
-POST        /image/upload           controllers.Courses.uploadPicture()
-GET         /image/:id              controllers.Courses.renderImage(id:  Long)
+POST        /image/upload                      controllers.Courses.uploadFile()
+GET         /image/:id                         controllers.Courses.renderImage(id:  Long)
 
-GET         /id                     controllers.Courses.showCoursePage(id)
+GET         /id                                controllers.Courses.showCoursePage(id)
 
-# Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file           controllers.Assets.at(path="/public", file)
+
+# доступ к файлам на сервере
+GET         /assets/*file                      controllers.Assets.at(path="/public", file)
+
+

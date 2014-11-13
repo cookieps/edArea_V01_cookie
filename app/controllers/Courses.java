@@ -4,19 +4,22 @@ import com.avaje.ebean.Ebean;
 import models.Course;
 import models.Picture;
 import models.User;
+import org.h2.store.fs.FileUtils;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
 import play.mvc.Security;
-import views.html.course;
-import views.html.courses;
-import views.html.creatingCourse;
-import views.html.upload;
+import sun.misc.IOUtils;
+import sun.nio.ch.IOUtil;
+import views.html.*;
+
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.List;
+import java.io.InputStream;
+import java.net.URL;
 
 import static models.Picture.allIds;
 
@@ -27,6 +30,10 @@ import static models.Picture.allIds;
 @Security.Authenticated(Secured.class)
 public class Courses extends Controller
 {
+
+    static long idPictureName = 0;
+
+
     public static Result creatingCourse()
     {
         return ok(creatingCourse.render(Form.form(Course.class)));
@@ -78,11 +85,11 @@ public class Courses extends Controller
     }
 
     public static Result uploadPicture() {
-        //Course currentCourse =  Course.find.where().like("email", "%"+request().username()+"%").like("current", "true").findUnique();
+        Course currentCourse =  Course.find.where().like("email", "%"+request().username()+"%").like("current", "true").findUnique();
 
-        Course currentCourse =  Course.find.where().like("email", "%"+request().username()+"%").like("current", "%"+true+"%").findUnique();
 
-        List<Course> all = Course.find.where().like("email","%"+request().username()+"%").findList();
+
+
 
         
 
@@ -98,7 +105,7 @@ public class Courses extends Controller
 
                 System.out.println("\n --------------------------------------------------- \n" + currentCourse.aboutCourse);
 
-                currentCourse.logoId = image.id;
+              //  currentCourse.logoId = image.id;
                 currentCourse.current = false;
                 currentCourse.save();
 
@@ -115,6 +122,35 @@ public class Courses extends Controller
             return badRequest(upload.render(null, "File uploaded"));
         }
     }
+            //   --------------------------
+
+
+    public static Result uploadFile() throws IOException {
+        Course currentCourse =  Course.find.where().like("email", "%"+request().username()+"%").like("current", "true").findUnique();
+        Http.MultipartFormData body = request().body().asMultipartFormData();
+        Http.MultipartFormData.FilePart filePart1 = body.getFile("filePart1");
+
+        idPictureName++;
+
+        File newFile1 = new File("public/logos/"+idPictureName+".jpg");
+
+      //  System.out.println("\n"+newFile1.getCanonicalFile().toString()+"\n");
+        currentCourse.logoPath = "logos/"+idPictureName+".jpg";
+        currentCourse.current = false;
+        currentCourse.save();
+
+
+        File file1 = filePart1.getFile();
+        InputStream isFile1 = new FileInputStream(file1);
+        byte[] byteFile1 = org.apache.commons.io.IOUtils.toByteArray(isFile1);
+        org.apache.commons.io.FileUtils.writeByteArrayToFile(newFile1, byteFile1);
+        isFile1.close();
+
+        return ok(index.render(User.find.byId(request().username())));
+    }
+
+
+
 
 
     public static Result renderImage(Long id) {
